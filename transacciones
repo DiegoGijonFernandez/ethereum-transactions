@@ -1,31 +1,3 @@
-## 🧱 ¿Qué es una transacción en Ethereum?
-
-Una transacción en Ethereum es una instrucción firmada criptográficamente enviada desde una cuenta externa (EOA, por sus siglas en inglés) que puede:
-
-* Transferir ETH a otra cuenta.
-* Interactuar con un contrato inteligente (por ejemplo, ejecutar una función).
-* Desplegar un nuevo contrato en la red.
-
-Cada transacción modifica el estado global de la red y debe ser validada y registrada en un bloque para ser considerada definitiva.
-
----
-
-## 🧩 Estructura de una transacción
-
-Una transacción en Ethereum contiene los siguientes campos clave:
-
-* **`from`**: Dirección del remitente.
-* **`to`**: Dirección del destinatario (puede ser nula si se está creando un contrato).
-* **`value`**: Cantidad de ETH (en Wei) a transferir.
-* **`gas`**: Límite de gas que el remitente está dispuesto a consumir.
-* **`gasPrice`**: Precio que el remitente está dispuesto a pagar por unidad de gas.
-* **`nonce`**: Número de transacciones enviadas previamente por el remitente.
-* **`data`**: Datos adicionales, como la carga útil para interactuar con contratos inteligentes.
-* **`v`, `r`, `s`**: Componentes de la firma digital que garantizan la autenticidad de la transacción.
-
-Estos campos permiten a los nodos de la red validar y procesar las transacciones de manera segura y ordenada.
-
----
 
 ## 🔄 Ciclo de vida de una transacción
 
@@ -69,35 +41,3 @@ La mempool es una estructura de datos mantenida por cada nodo de la red que cont
 * Las transacciones en la mempool son visibles para todos los nodos y pueden ser seleccionadas por los validadores para su inclusión en bloques futuros.
 * Las transacciones con precios de gas más altos tienen prioridad, ya que ofrecen mayores incentivos a los validadores.
 
----
-
-## 🔢 Importancia del nonce
-
-El **nonce** es un número que representa la cantidad de transacciones enviadas desde una cuenta específica. Es crucial para:
-
-* **Ordenar las transacciones**: Las transacciones deben ser procesadas en orden de nonce.
-* **Evitar ataques de repetición**: Cada transacción debe tener un nonce único para ser válida.
-* **Gestionar reemplazos**: Para reemplazar una transacción pendiente, se debe enviar una nueva con el mismo nonce y condiciones diferentes (por ejemplo, un precio de gas más alto).
-
----
-
-## 🛠️ Herramientas para monitorear transacciones
-
-Para desarrollar tu herramienta de análisis, puedes utilizar las siguientes APIs y servicios:
-
-* **Alchemy**: Proporciona APIs como `eth_getTransactionByHash` y `eth_getTransactionReceipt` para obtener detalles de transacciones y sus recibos.
-* **Etherscan**: Permite consultar el estado de transacciones y ver si han sido descartadas o reemplazadas.
-* **Mempool Watcher de Alchemy**: Una interfaz que muestra transacciones pendientes, descartadas y reemplazadas, facilitando el monitoreo y depuración.
-
----
-
-## ✅ Próximos pasos para tu herramienta
-
-Con esta comprensión, puedes avanzar en el desarrollo de tu herramienta:
-
-1. **Recolección de datos**: Utiliza las APIs mencionadas para obtener transacciones reales o simuladas.
-2. **Interfaz de usuario**: Implementa una interfaz sencilla (por ejemplo, con Streamlit) que muestre las transacciones y sus estados.
-3. **Análisis de riesgo**: Establece reglas o modelos simples que evalúen el riesgo de cada transacción (bajo, medio, alto) basándose en factores como el monto transferido, la interacción con contratos desconocidos o la frecuencia de transacciones desde una cuenta.
-4. **Explicaciones**: Proporciona una explicación clara para cada evaluación de riesgo, ayudando a los usuarios a comprender las razones detrás de cada clasificación.
-
-Si necesitas asistencia adicional para implementar alguna de estas funcionalidades o tienes preguntas específicas, ¡no dudes en preguntar!
