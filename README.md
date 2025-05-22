@@ -57,6 +57,48 @@ Este tipo de dataset, con variables agregadas y etiqueta de fraude, es ideal par
 
 ---
 
+# Enriquecimiento del Dataset Ethereum Transactions
+Este dataset contiene información agregada por bloque sobre transacciones de Ethereum, incluyendo métricas como el valor medio recibido, número de transacciones totales, y etiquetas de fraude.
+
+Para mejorar el análisis y la detección de fraude, hemos añadido nuevas columnas al dataset original que caracterizan los tipos de transacciones y el despliegue de contratos dentro de cada bloque.
+
+Tipos de transacciones añadidos:
+tx_type_0x0_ratio: Proporción de transacciones legacy (tipo 0x0).
+
+tx_type_0x1_ratio: Proporción de transacciones Access List (EIP-2718).
+
+tx_type_0x2_ratio: Proporción de transacciones con tarifas dinámicas (EIP-1559).
+
+tx_type_0x3_ratio: Proporción de transacciones Blob (EIP-4844).
+
+tx_type_0x4_ratio: Proporción de transacciones Setcode (EIP-7702).
+
+Detección de despliegue de contratos:
+contract_deploy_tx_count: Número de transacciones que despliegan contratos en ese bloque.
+
+contract_deploy_tx_ratio: Proporción de transacciones que despliegan contratos respecto al total.
+
+¿Cómo se hizo?
+Usamos un script en Python con la librería Web3.py para:
+
+Leer el dataset original con números de bloque (blockNumber).
+
+Consultar a un nodo Ethereum (usando una API de Alchemy) para obtener todas las transacciones de cada bloque.
+
+Contar y calcular la proporción de cada tipo de transacción y cuántas transacciones despliegan contratos.
+
+Añadir estas nuevas columnas al dataset original y guardarlo en un nuevo archivo CSV.
+
+Este enriquecimiento permite:
+
+Analizar cómo varía la composición de tipos de transacciones en bloques con y sin fraude.
+
+Detectar patrones relacionados con despliegue masivo de contratos, que a menudo se asocia a actividades sospechosas o fraudulentas.
+
+Mejorar modelos de machine learning para clasificación y detección de fraude en la red Ethereum.
+
+---
+
 ## 🛠️ Instalación y uso
 
 ### Requisitos previos
