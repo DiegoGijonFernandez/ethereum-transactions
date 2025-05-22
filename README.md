@@ -62,7 +62,8 @@ Este dataset contiene información agregada por bloque sobre transacciones de Et
 
 Para mejorar el análisis y la detección de fraude, hemos añadido nuevas columnas al dataset original que caracterizan los tipos de transacciones y el despliegue de contratos dentro de cada bloque.
 
-Tipos de transacciones añadidos:
+### Tipos de transacciones añadidos:
+
 tx_type_0x0_ratio: Proporción de transacciones legacy (tipo 0x0).
 
 tx_type_0x1_ratio: Proporción de transacciones Access List (EIP-2718).
