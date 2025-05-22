@@ -57,7 +57,7 @@ Este tipo de dataset, con variables agregadas y etiqueta de fraude, es ideal par
 
 ---
 
-# Enriquecimiento del Dataset Ethereum Transactions
+## Enriquecimiento del Dataset Ethereum Transactions
 Este dataset contiene información agregada por bloque sobre transacciones de Ethereum, incluyendo métricas como el valor medio recibido, número de transacciones totales, y etiquetas de fraude.
 
 Para mejorar el análisis y la detección de fraude, hemos añadido nuevas columnas al dataset original que caracterizan los tipos de transacciones y el despliegue de contratos dentro de cada bloque.
@@ -78,7 +78,7 @@ contract_deploy_tx_count: Número de transacciones que despliegan contratos en e
 
 contract_deploy_tx_ratio: Proporción de transacciones que despliegan contratos respecto al total.
 
-¿Cómo se hizo?
+### ¿Cómo se hizo?
 Usamos un script en Python con la librería Web3.py para:
 
 Leer el dataset original con números de bloque (blockNumber).
@@ -89,7 +89,7 @@ Contar y calcular la proporción de cada tipo de transacción y cuántas transac
 
 Añadir estas nuevas columnas al dataset original y guardarlo en un nuevo archivo CSV.
 
-Este enriquecimiento permite:
+### Este enriquecimiento permite:
 
 Analizar cómo varía la composición de tipos de transacciones en bloques con y sin fraude.
 
