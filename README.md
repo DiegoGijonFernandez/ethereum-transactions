@@ -57,46 +57,101 @@ Este tipo de dataset, con variables agregadas y etiqueta de fraude, es ideal par
 
 ---
 
-## Enriquecimiento del Dataset Ethereum Transactions
-Este dataset contiene información agregada por bloque sobre transacciones de Ethereum, incluyendo métricas como el valor medio recibido, número de transacciones totales, y etiquetas de fraude.
+## 🧠 Enriquecimiento del Dataset Ethereum Transactions
 
-Para mejorar el análisis y la detección de fraude, hemos añadido nuevas columnas al dataset original que caracterizan los tipos de transacciones y el despliegue de contratos dentro de cada bloque.
+He estado trabajando con un **dataset de transacciones de Ethereum**, específicamente un conjunto de datos **agregados por bloque**. Pero ese dataset original **no incluía detalles técnicos clave** que nos pueden ayudar a entender mejor el comportamiento de las transacciones en esos bloques.
 
-### Tipos de transacciones añadidos:
+Quería detectar o analizar comportamientos maliciosos o sospechosos en Ethereum. Para eso, necesitabas enriquecer el dataset con **características técnicas** más modernas, como: 
 
-tx_type_0x0_ratio: Proporción de transacciones legacy (tipo 0x0).
+* **Tipos de transacciones**: Diferentes versiones como legacy (`0x0`), EIP-1559 (`0x2`), etc.
+* **Despliegues de contratos inteligentes**: Si en ese bloque se ha creado un nuevo contrato (`tx.to is None`).
 
-tx_type_0x1_ratio: Proporción de transacciones Access List (EIP-2718).
+Esto es útil porque algunos tipos de fraude (como scam tokens) implican desplegar contratos sospechosos, o usar nuevas formas de transacción para ocultar actividad.
 
-tx_type_0x2_ratio: Proporción de transacciones con tarifas dinámicas (EIP-1559).
 
-tx_type_0x3_ratio: Proporción de transacciones Blob (EIP-4844).
+###  Escribimos un script en Python llamado "modifificardataset.py" que:
 
-tx_type_0x4_ratio: Proporción de transacciones Setcode (EIP-7702).
+1. **Lee el dataset original** (`data.txt`).
+2. **Conecta a Ethereum** usando la API de Alchemy.
+3. Por cada bloque (`blockNumber`):
 
-Detección de despliegue de contratos:
-contract_deploy_tx_count: Número de transacciones que despliegan contratos en ese bloque.
+   * Descarga todas las transacciones completas.
+   * Detecta el tipo de cada transacción (`tx.type`).
 
-contract_deploy_tx_ratio: Proporción de transacciones que despliegan contratos respecto al total.
+     * Si es `None` → legacy (`0x0`)
+     * Si es `2` → EIP-1559 (`0x2`), etc (y así sumando).
+   * Detecta si despliega un contrato (`tx.to is None`).
+4. Calcula proporciones por tipo y cuántas crean contratos.
+5. Añade esas columnas nuevas al dataset.
+6. Guarda el resultado en un nuevo archivo CSV.
 
-### ¿Cómo se hizo?
-Usamos un script en Python con la librería Web3.py para:
+---
 
-Leer el dataset original con números de bloque (blockNumber).
+## 📄 ¿Qué hace el código exactamente?
 
-Consultar a un nodo Ethereum (usando una API de Alchemy) para obtener todas las transacciones de cada bloque.
 
-Contar y calcular la proporción de cada tipo de transacción y cuántas transacciones despliegan contratos.
+### 🔹 Conectar con Ethereum
 
-Añadir estas nuevas columnas al dataset original y guardarlo en un nuevo archivo CSV.
+```python
+w3 = Web3(Web3.HTTPProvider(f"https://eth-mainnet.g.alchemy.com/v2/{ALCHEMY_API_KEY}"))
+```
 
-### Este enriquecimiento permite:
+Nos conectamos a Ethereum a través del nodo de Alchemy usando tu API key. Yo usé la que me generó mi proyecto personal.
 
-Analizar cómo varía la composición de tipos de transacciones en bloques con y sin fraude.
+---
 
-Detectar patrones relacionados con despliegue masivo de contratos, que a menudo se asocia a actividades sospechosas o fraudulentas.
+### 🔹 Leer el dataset original
 
-Mejorar modelos de machine learning para clasificación y detección de fraude en la red Ethereum.
+```python
+df = pd.read_csv(INPUT_FILE, sep="\t")
+```
+
+Leemos el archivo `.txt` que contiene los bloques y sus estadísticas.
+
+---
+
+### 🔹 Para cada bloque, obtener nuevas características
+
+```python
+block = w3.eth.get_block(block_number, full_transactions=True)
+```
+
+Conseguimos todas las transacciones de ese bloque.
+
+---
+
+### 🔹 Detectar tipos de transacción
+
+```python
+tx_types = [tx.type if tx.type is not None else 0 for tx in txs]
+type_counts = Counter(tx_types)
+```
+
+Cada transacción puede ser de tipo `0` (legacy), `1` (access list), `2` (EIP-1559), etc. Contamos cuántas hay de cada tipo.
+
+---
+
+### 🔹 Detectar creación de contratos
+
+```python
+deploy_count = sum(1 for tx in txs if tx.to is None)
+```
+
+Si `tx.to` es `None`, es un contrato nuevo.
+
+---
+
+### 🔹 Calcular proporciones y añadirlas al dataset
+
+```python
+return {
+    "tx_type_0x0_ratio": type_counts.get(0, 0) / total,
+    ...
+    "contract_deploy_tx_ratio": deploy_count / total
+}
+```
+
+Creamos columnas nuevas con esa información.
 
 ---
 
