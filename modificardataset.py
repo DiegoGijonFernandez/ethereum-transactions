@@ -4,18 +4,18 @@ from collections import Counter
 from tqdm import tqdm
 import time
 
-# === CONFIGURACIÓN ===
-ALCHEMY_API_KEY = "DiSaYeAziqFt_zi7tutYIdHaYgQZSrFE"  # Sustituye si usas otra clave
+# CONFIGURACIÓN
+ALCHEMY_API_KEY = "DiSaYeAziqFt_zi7tutYIdHaYgQZSrFE"  # Sustituye si en tu caso usas otra clave
 INPUT_FILE = "C:/Users/diego/Downloads/analisis-transacciones-ethereum/data/data.txt"
 OUTPUT_FILE = "ETFD_Dataset_enriched.csv"
 
-# === CONEXIÓN A ETHEREUM ===
+# CONEXIÓN A ETHEREUM 
 w3 = Web3(Web3.HTTPProvider(f"https://eth-mainnet.g.alchemy.com/v2/DiSaYeAziqFt_zi7tutYIdHaYgQZSrFE"))
 
-# === CARGAR DATASET ORIGINAL ===
+# DATASET ORIGINAL 
 df = pd.read_csv(INPUT_FILE, sep="\t")
 
-# === FUNCIÓN PARA OBTENER FEATURES DEL BLOQUE ===
+# FUNCIÓN PARA OBTENER FEATURES DEL BLOQUE
 def get_block_features(block_number):
     try:
         block = w3.eth.get_block(int(block_number), full_transactions=True)
@@ -29,7 +29,7 @@ def get_block_features(block_number):
         # Conteo de despliegues de contrato
         deploy_count = sum(1 for tx in txs if tx.to is None)
 
-        # DEBUG opcional
+        # DEBUG 
         print(f"Bloque {block_number} → tipos: {dict(type_counts)}, contract deploys: {deploy_count}")
 
         return {
@@ -54,19 +54,19 @@ def get_block_features(block_number):
             "contract_deploy_tx_ratio": None
         }
 
-# === APLICAR A TODOS LOS BLOQUES ===
+#  APLICAR A TODOS LOS BLOQUES 
 print("Consultando bloques de Ethereum...")
 features = []
 for block_number in tqdm(df["blockNumber"]):
     features.append(get_block_features(block_number))
     time.sleep(0.2)  # Para evitar rate limit
 
-# === CREAR DATAFRAME DE FEATURES ===
+# CREAR DATAFRAME DE FEATURES 
 features_df = pd.DataFrame(features)
 
-# === UNIR AL DATASET ORIGINAL ===
+# UNIR AL DATASET ORIGINAL 
 df_enriched = pd.concat([df.reset_index(drop=True), features_df], axis=1)
 
-# === GUARDAR RESULTADO FINAL ===
+# GUARDAR RESULTADO FINAL 
 df_enriched.to_csv(OUTPUT_FILE, index=False)
-print(f"✅ Dataset enriquecido guardado como: {OUTPUT_FILE}")
+print(f"Dataset enriquecido guardado como: {OUTPUT_FILE}")
