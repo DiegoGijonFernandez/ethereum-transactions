@@ -43,19 +43,6 @@ El mempool es el espacio donde las transacciones esperan antes de ser minadas. L
 
 ---
 
-## 📊 Sobre el dataset utilizado
-
-Para el análisis y clasificación de riesgo, este proyecto emplea un dataset estructurado con variables agregadas por dirección y periodo temporal, que incluye:
-
-- **blockNumber, confirmations, fecha y hora**
-- **mean_value_received, variance_value_received, total_received:** Estadísticas sobre los valores recibidos.
-- **total_tx_sent, total_tx_sent_malicious, total_tx_sent_unique:** Totales y unicidad de transacciones enviadas, incluyendo aquellas marcadas como maliciosas.
-- **total_tx_received_malicious_unique:** Número de transacciones maliciosas recibidas.
-- **Fraud:** Etiqueta binaria que indica si la actividad está asociada a fraude.
-
-Este tipo de dataset, con variables agregadas y etiqueta de fraude, es ideal para la detección de patrones, entrenamiento de modelos de clasificación de riesgo y visualización clara en la interfaz. Permite mostrar, por ejemplo, si una dirección presenta alta varianza en valores recibidos, actividad inusual o historial de transacciones maliciosas, facilitando la explicación de cada nivel de riesgo.
-
----
 
 ## 🧠 Enriquecimiento del Dataset Ethereum Transactions
 
