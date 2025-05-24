@@ -155,37 +155,64 @@ Creamos columnas nuevas con esa información.
 
 ---
 
-## 🛠️ Instalación y uso
+Perfecto, aquí tienes un resumen claro y completo de **todo lo que hemos implementado en tu app**, listo para añadir al `README.md` del proyecto.
 
-### Requisitos previos
+---
 
-- Node.js v14 o superior.
-- Cuenta en Alchemy con clave API.
-- Cuenta en GitHub.
+## 🧾 Descripción del proyecto
 
-### Pasos de instalación
+Esta aplicación permite visualizar y analizar transacciones simuladas en la red Ethereum, con un enfoque especial en la **detección de posibles comportamientos fraudulentos** usando reglas heurísticas y visualizaciones interactivas. 
+ATENCION! He usado otro dataset, generado aleatoriamente por mí llamado "Transacciones_Simuladas_Ethereum.csv", ya que nos faltaban datos como irección del emisor, cantidad, tipo, gas usado, fecha, etc... Mi intención es usar también el original pero por la falta de tiempo, opté por una versión más comoda
 
-1. **Clonar el repositorio:**
-   ```bash
-   git clone https://github.com/tu_usuario/ethereum-transaction-tracker.git
-   cd ethereum-transaction-tracker
-   ```
+## 🧩 Funcionalidades principales
 
-2. **Instalar dependencias:**
-   ```bash
-   npm install
-   ```
+### 🔍 Explorador de bloques
 
-3. **Configurar variables de entorno:**
-   Crea un archivo `.env` y añade tu clave API de Alchemy:
-   ```env
-   ALCHEMY_API_KEY=tu_clave_api
-   ```
+* Visualiza transacciones por bloque.
+* Filtros avanzados: bloque, tipo de transacción (por EIP), emisor.
+* Muestra información detallada: emisor, receptor, valor (ETH), gas, tipo, contrato, hash, fecha.
 
-4. **Iniciar la aplicación:**
-   ```bash
-   npm start
-   ```
+### ⚠️ Análisis de riesgo
+
+* Detecta posibles transacciones fraudulentas basándose en:
+
+  * Valor alto transferido (> 5 ETH)
+  * Gas utilizado muy alto (> 250,000)
+  * Despliegue de contratos
+  * Tipos avanzados de transacción (EIP-4844: `0x3`, EIP-7702: `0x4`)
+* Clasificación de riesgo: Ninguno, Bajo, Medio, Alto.
+* Muestra justificación matemática de cada caso.
+* Visualizaciones:
+
+  * Gráfico de barras por nivel de riesgo
+  * Gráfico de pastel por tipo de transacción
+
+---
+
+## 📂 Archivos importantes
+
+* `app.py`: código principal de la app Streamlit.
+* `data/Transacciones_Simuladas_Ethereum.csv`: dataset de ejemplo con transacciones simuladas.
+* `data/1984-de-george-orwell-9.jpeg`: imagen de fondo personalizada.
+
+---
+
+## ▶️ Cómo ejecutar
+
+1. Clona o descarga este repositorio.
+2. Instala dependencias:
+
+```bash
+pip install streamlit pandas matplotlib
+```
+
+3. Ejecuta la app:
+
+```bash
+streamlit run app.py
+```
+
+---
 
 ## 📚 Recursos y documentación
 
