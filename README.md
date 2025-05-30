@@ -220,9 +220,13 @@ streamlit run app.py
 ## 📁 Estructura de Archivos
 
 Transacciones_Simuladas_Ethereum.csv:	Dataset con transacciones simuladas de Ethereum
+
 entrenar_modelo_validacion.py:	Entrenamiento y validación del modelo Random Forest
+
 modelo_riesgo_fraude.pkl:	Modelo entrenado para clasificación de riesgo
+
 app_con_ia.py:	Aplicación Streamlit con IA integrada
+
 README.md	Documentación del proyecto
 
 ---
@@ -244,7 +248,7 @@ Clasificación IA: resultado del modelo supervisado.
 
 ---
 
-🧠 Créditos y Reconocimientos
+## 🧠 Créditos y Reconocimientos
 
 Desarrollado por Diego Gijón Fernández como parte de un proyecto de análisis y visualización de seguridad Ethereum para la empresa Decentralized Security.
 
