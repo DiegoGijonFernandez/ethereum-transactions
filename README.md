@@ -176,6 +176,31 @@ ATENCION! He usado otro dataset, generado aleatoriamente por mí llamado "Transa
 
 ---
 
+## 🧠 Análisis de Riesgo con IA
+
+Este proyecto también incorpora un sistema de inteligencia artificial para analizar automáticamente el riesgo de fraude en las transacciones de Ethereum.
+
+### 🔍 ¿Cómo funciona?
+
+Se entrenó un modelo de clasificación basado en Random Forest con datos simulados. Las etiquetas de fraude fueron generadas usando reglas heurísticas, como:
+
+- Transacciones con más de 2 ETH.
+- Uso de más de 200,000 unidades de gas.
+- Despliegue de contratos inteligentes.
+
+El modelo considera variables como `value`, `gasUsed`, `contract_deploy`, codificaciones de direcciones y la hora de la transacción.
+
+### 📦 Integración en la App
+
+La app web muestra ahora dos evaluaciones de riesgo:
+
+- **Riesgo (Reglas):** Basado en condiciones fijas interpretables.
+- **Clasificación IA:** Basado en el modelo entrenado que generaliza patrones de riesgo.
+
+Esto permite comparar el juicio humano basado en reglas con las predicciones automáticas del modelo de IA.
+
+---
+
 ## 📂 Archivos importantes
 
 * `app.py`: código principal de la app Streamlit.
