@@ -244,6 +244,8 @@ Clasificación IA: resultado del modelo supervisado.
 🧠 Créditos y Reconocimientos
 Desarrollado por Diego Gijón Fernández como parte de un proyecto de análisis y visualización de seguridad Ethereum para la empresa Decentralized Security.
 
+---
+
 ## 📚 Recursos y documentación
 
 - [Documentación oficial de Alchemy: Understanding Transactions](https://www.alchemy.com/docs/understanding-transactions)[1]
