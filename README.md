@@ -203,6 +203,10 @@ Esto permite comparar el juicio humano basado en reglas con las predicciones aut
 
 ## ▶️ Cómo ejecutar
 
+Se puede ver en: https://ethereum-transactions-chumenc9aketxw2mbpqzs5.streamlit.app/
+
+ó
+
 1. Clona o descarga este repositorio.
 2. Instala dependencias:
 
