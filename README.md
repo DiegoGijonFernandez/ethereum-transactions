@@ -227,6 +227,8 @@ README.md	Documentación del proyecto
 
 ---
 ## 📊 Visualización y Uso
+
+
 Dentro de la aplicación verás dos pestañas principales:
 
 Explorador de Bloques: filtra por tipo, dirección o número de bloque.
@@ -239,9 +241,11 @@ Nivel de Riesgo (Reglas): análisis explicable.
 
 Clasificación IA: resultado del modelo supervisado.
 
+
 ---
 
 🧠 Créditos y Reconocimientos
+
 Desarrollado por Diego Gijón Fernández como parte de un proyecto de análisis y visualización de seguridad Ethereum para la empresa Decentralized Security.
 
 ---
