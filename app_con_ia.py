@@ -28,11 +28,11 @@ def set_background(image_file_path):
     """
     st.markdown(css, unsafe_allow_html=True)
 
-set_background("data/1984-de-george-orwell-9.jpeg")
+set_background("1984-de-george-orwell-9.jpeg")
 
 @st.cache_data
 def load_data():
-    df = pd.read_csv("data/Transacciones_Simuladas_Ethereum.csv", parse_dates=['timestamp'])
+    df = pd.read_csv("Transacciones_Simuladas_Ethereum.csv", parse_dates=['timestamp'])
 
     df['tx_type_desc'] = df['tx_type'].map({
         '0x0': 'Legacy (pre-EIP)',
