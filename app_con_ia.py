@@ -27,8 +27,9 @@ def set_background(image_file_path):
     </style>
     """
     st.markdown(css, unsafe_allow_html=True)
+    
+set_background("./data/1984-de-george-orwell-9.jpeg")
 
-set_background("data/1984-de-george-orwell-9.jpeg")
 
 @st.cache_data
 def load_data():
