@@ -201,14 +201,6 @@ Esto permite comparar el juicio humano basado en reglas con las predicciones aut
 
 ---
 
-## 📂 Archivos importantes
-
-* `app.py`: código principal de la app Streamlit.
-* `data/Transacciones_Simuladas_Ethereum.csv`: dataset de ejemplo con transacciones simuladas.
-* `data/1984-de-george-orwell-9.jpeg`: imagen de fondo personalizada.
-
----
-
 ## ▶️ Cómo ejecutar
 
 1. Clona o descarga este repositorio.
